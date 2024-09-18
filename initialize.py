@@ -4,7 +4,7 @@ from agent import AgentConfig
 def initialize():
     
     # main chat model used by agents (smarter, more accurate)
-    chat_llm = models.get_openai_chat(model_name="gpt-4o-mini", temperature=0)
+    chat_llm = models.get_openai_chat(model_name="gpt-4-turbo", temperature=0.1)
     # chat_llm = models.get_ollama_chat(model_name="gemma2:latest", temperature=0)
     # chat_llm = models.get_lmstudio_chat(model_name="lmstudio-community/Meta-Llama-3.1-8B-Instruct-GGUF", temperature=0)
     # chat_llm = models.get_openrouter_chat(model_name="mattshumer/reflection-70b:free")
@@ -14,10 +14,11 @@ def initialize():
     # chat_llm = models.get_groq_chat(model_name="llama-3.1-70b-versatile", temperature=0)
     
     # utility model used for helper functions (cheaper, faster)
-    utility_llm = chat_llm # change if you want to use a different utility model
+    utility_llm = models.get_openai_chat(model_name="gpt-4o", temperature=0.1) # change if you want to use a different utility model
 
     # embedding model used for memory
     embedding_llm = models.get_openai_embedding(model_name="text-embedding-3-small")
+    embedding_llm = models.get_huggingface_embedding(model_name="FinLang/finance-embeddings-investopedia")
     # embedding_llm = models.get_ollama_embedding(model_name="nomic-embed-text")
     # embedding_llm = models.get_huggingface_embedding(model_name="sentence-transformers/all-MiniLM-L6-v2")
     # embedding_llm = models.get_lmstudio_embedding(model_name="nomic-ai/nomic-embed-text-v1.5-GGUF")
